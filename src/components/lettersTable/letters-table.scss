@@ -1,0 +1,16 @@
+.lt-letters-wrapper {
+    width: 100%;
+    border: 1px solid yellow;
+
+    &__letter {
+        color: black;
+
+        &--hit {
+            color: green;
+        }
+
+        &--miss {
+            color: red;
+        }
+    }
+}
