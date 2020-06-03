@@ -6,6 +6,7 @@ import {
   choseRandomNumber,
 } from '../../logic-functions';
 import LettersTable from '../../components/lettersTable';
+import Score from '../../components/score';
 
 const Home = props => {
   const [countNumber, setCountNumber] = useState(0);
@@ -19,6 +20,8 @@ const Home = props => {
 
   const timer = useRef(null);
   const timerOn = useRef(false);
+
+  console.log(mappedLetters);
 
   useEffect(() => {
     if (gameInProgress && !timerOn.current) {
@@ -84,6 +87,7 @@ const Home = props => {
       <h1>number: {randomNumber && randomNumber.number}</h1>
       <button onClick={startGame}>Start</button>
       <input readOnly value={pressedLetter} />
+      <Score mappedLetters={mappedLetters} />
       <LettersTable mappedLetters={mappedLetters} />
     </div>
   );
