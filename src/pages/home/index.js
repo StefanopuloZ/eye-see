@@ -20,16 +20,19 @@ const Home = props => {
   const [gameInProgress, setGameInProgress] = useState(false);
   const [pressedLetter, setPressedLetter] = useState('');
   const [difficulty, setDifficulty] = useState('medium');
-  const [numbersArray, setNumbersArray] = useState(makeNumbersArray());
-  const [mappedLetters, setMappedLetters] = useState(
-    makeLettersMap(makeNumbersArray())
-  );
+  const [numbersArray, setNumbersArray] = useState([]);
+  const [mappedLetters, setMappedLetters] = useState({});
   const [randomNumber, setRandomNumber] = useState(null);
 
   const timer = useRef(null);
   const timerOn = useRef(false);
 
-  console.log(mappedLetters);
+  useEffect(() => {
+    const newNumbersArray = makeNumbersArray();
+    setNumbersArray(newNumbersArray);
+    setMappedLetters(makeLettersMap(newNumbersArray));
+    // eslint-disable-next-line
+  }, []);
 
   useEffect(() => {
     if (gameInProgress && !timerOn.current) {
@@ -47,6 +50,13 @@ const Home = props => {
   const handleRadioChange = e => {
     setDifficulty(e.currentTarget.value);
   };
+
+  const stopGame = () => {
+    setGameInProgress(false);
+    clearTimeout(timer.current);
+    setNumbersArray(makeNumbersArray());
+    setCountNumber(0);
+  }
 
   const handleKeyPress = e => {
     const key = e.key.toLowerCase();
@@ -81,24 +91,35 @@ const Home = props => {
         setCountNumber(countNumber + 1);
       }, difficultyMap[difficulty]);
     } else {
-      console.log('END');
       setGameInProgress(false);
+      setTimeout(() => {
+        alert('Game Over');
+        stopGame();
+      }, 10);
     }
   };
 
-  const startGame = () => {
-    console.log('start');
-    setPressedLetter('');
-    setCountNumber(0);
-    setGameInProgress(true);
-    startTimer();
+  const handleButtonClick = () => {
+    if (!gameInProgress) {
+      setPressedLetter('');
+      setCountNumber(0);
+      setGameInProgress(true);
+      setMappedLetters(makeLettersMap(numbersArray));
+      startTimer();
+    }
+
+    if (gameInProgress) {
+      stopGame();
+    }
   };
 
   return (
     <div className="test" tabIndex={0} onKeyPress={handleKeyPress}>
-      <RadioButtons difficulty={difficulty} onChange={handleRadioChange}/>
+      <RadioButtons difficulty={difficulty} onChange={handleRadioChange} disabled={gameInProgress} />
       <h1>number: {randomNumber && randomNumber.number}</h1>
-      <button onClick={startGame}>Start</button>
+      <button onClick={handleButtonClick}>
+        {gameInProgress ? 'Stop' : 'Start'}
+      </button>
       <input readOnly value={pressedLetter} />
       <Score mappedLetters={mappedLetters} />
       <LettersTable mappedLetters={mappedLetters} />

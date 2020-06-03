@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './radio-buttons.scss';
 
 const RadioButtons = props => {
-  const { onChange, difficulty } = props;
+  const { onChange, difficulty, disabled } = props;
 
   return (
     <form className="lt-radio-buttons-wrapper">
@@ -14,6 +14,7 @@ const RadioButtons = props => {
             value="easy"
             onChange={onChange}
             checked={difficulty === 'easy'}
+            disabled={disabled}
           />
           Easy
         </label>
@@ -25,6 +26,7 @@ const RadioButtons = props => {
             value="medium"
             onChange={onChange}
             checked={difficulty === 'medium'}
+            disabled={disabled}
           />
           Medium
         </label>
@@ -36,6 +38,7 @@ const RadioButtons = props => {
             value="hard"
             onChange={onChange}
             checked={difficulty === 'hard'}
+            disabled={disabled}
           />
           Hard
         </label>
@@ -46,8 +49,11 @@ const RadioButtons = props => {
 
 RadioButtons.propTypes = {
   onChange: PropTypes.func.isRequired,
+  disabled: PropTypes.bool,
 };
 
-RadioButtons.defaultProps = {};
+RadioButtons.defaultProps = {
+  disabled: true,
+};
 
 export default RadioButtons;
