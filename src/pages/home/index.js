@@ -1,11 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './style.scss';
+import {
+  lettersMap,
+  makeNumbersArray,
+  choseRandomNumber,
+} from '../../logic-functions';
 
 const Home = props => {
   const [countNumber, setCountNumber] = useState(0);
   const [gameInProgress, setGameInProgress] = useState(false);
+  const [pressedLetter, setPressedLetter] = useState(null);
 
   const timer = useRef(null);
+
+  console.log(
+    lettersMap,
+    makeNumbersArray(),
+    choseRandomNumber(makeNumbersArray())
+  );
 
   useEffect(() => {
     if (gameInProgress) {
@@ -16,13 +28,17 @@ const Home = props => {
   const handleKeyPress = e => {
     const key = e.key;
     console.log(key);
+    setPressedLetter(key);
 
     if (key === 'a') {
-      console.log('cleared!');
-      clearTimeout(timer.current);
+      console.log('correct!');
     }
 
+    clearTimeout(timer.current);
     setCountNumber(countNumber + 1);
+    setTimeout(() => {
+      setPressedLetter('');
+    }, 200);
   };
 
   const startTimer = () => {
@@ -41,6 +57,7 @@ const Home = props => {
 
   const startGame = () => {
     console.log('start');
+    setPressedLetter('');
     setCountNumber(0);
     setGameInProgress(true);
     startTimer();
@@ -52,6 +69,7 @@ const Home = props => {
     <div className="test" tabIndex={0} onKeyPress={handleKeyPress}>
       <h1>game / count: {countNumber}</h1>
       <button onClick={startGame}>Start</button>
+      <input value={pressedLetter} />
     </div>
   );
 };
