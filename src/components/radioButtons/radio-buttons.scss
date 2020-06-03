@@ -1,0 +1,10 @@
+.lt-radio-buttons-wrapper {
+    display: flex;
+    width: max-content;
+    margin: auto;
+
+    & label {
+        display: block;
+        width: 200px;
+    }
+}
