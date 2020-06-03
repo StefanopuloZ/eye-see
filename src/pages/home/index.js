@@ -59,6 +59,9 @@ const Home = props => {
   }
 
   const handleKeyPress = e => {
+    if (!gameInProgress) {
+      return;
+    }
     const key = e.key.toLowerCase();
     const newMappedLetters = JSON.parse(JSON.stringify(mappedLetters));
     let isHit = 'miss';
