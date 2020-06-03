@@ -4,7 +4,6 @@ import {
   makeLettersMap,
   makeNumbersArray,
   choseRandomNumber,
-  letters,
 } from '../../logic-functions';
 import LettersTable from '../../components/lettersTable';
 
@@ -12,18 +11,22 @@ const Home = props => {
   const [countNumber, setCountNumber] = useState(0);
   const [gameInProgress, setGameInProgress] = useState(false);
   const [pressedLetter, setPressedLetter] = useState('');
-  const [mappedLetters, setMappedLetters] = useState(makeLettersMap(makeNumbersArray()));
+  const [numbersArray, setNumbersArray] = useState(makeNumbersArray());
+  const [mappedLetters, setMappedLetters] = useState(
+    makeLettersMap(makeNumbersArray())
+  );
+  const [randomNumber, setRandomNumber] = useState(null);
 
   const timer = useRef(null);
-
-  // console.log(
-  //   letters,
-  //   makeLettersMap(makeNumbersArray()),
-  //   makeNumbersArray(),
-  //   choseRandomNumber(makeNumbersArray())
-  // );
+  const timerOn = useRef(false);
 
   useEffect(() => {
+    if (gameInProgress && !timerOn.current) {
+      const newMappedLetters = JSON.parse(JSON.stringify(mappedLetters));
+      newMappedLetters[randomNumber.letter].status = 'miss';
+      setMappedLetters(newMappedLetters);
+    }
+
     if (gameInProgress) {
       startTimer();
     }
@@ -31,13 +34,18 @@ const Home = props => {
   }, [countNumber]);
 
   const handleKeyPress = e => {
-    const key = e.key;
-    console.log(key);
+    const key = e.key.toLowerCase();
+    const newMappedLetters = JSON.parse(JSON.stringify(mappedLetters));
+    let isHit = 'miss';
     setPressedLetter(key);
 
-    if (key === 'a') {
-      console.log('correct!');
+    if (key === randomNumber.letter) {
+      isHit = 'hit';
     }
+
+    newMappedLetters[randomNumber.letter].status = isHit;
+
+    setMappedLetters(newMappedLetters);
 
     clearTimeout(timer.current);
     setCountNumber(countNumber + 1);
@@ -47,16 +55,19 @@ const Home = props => {
   };
 
   const startTimer = () => {
-    console.log(countNumber);
+    timerOn.current = true;
+    if (numbersArray.length > 0) {
+      const randomResult = choseRandomNumber(numbersArray);
+      setRandomNumber(randomResult.randomNumber);
+      setNumbersArray(randomResult.newArray);
 
-    if (countNumber < 3) {
       timer.current = setTimeout(() => {
-        const newCount = countNumber + 1;
+        timerOn.current = false;
         setCountNumber(countNumber + 1);
-        console.log('time expired newCount:', newCount, ' / old:', countNumber);
       }, 2000);
     } else {
       console.log('END');
+      setGameInProgress(false);
     }
   };
 
@@ -68,11 +79,9 @@ const Home = props => {
     startTimer();
   };
 
-  console.log('rerender');
-
   return (
     <div className="test" tabIndex={0} onKeyPress={handleKeyPress}>
-      <h1>game / count: {countNumber}</h1>
+      <h1>number: {randomNumber && randomNumber.number}</h1>
       <button onClick={startGame}>Start</button>
       <input readOnly value={pressedLetter} />
       <LettersTable mappedLetters={mappedLetters} />

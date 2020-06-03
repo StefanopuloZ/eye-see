@@ -1,9 +1,19 @@
 .lt-letters-wrapper {
     width: 100%;
     border: 1px solid yellow;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    margin: auto;
+    margin-top: 20px;
+    text-transform: uppercase;
 
     &__letter {
-        color: black;
+        font-size: 32px;
+        min-width: 100px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
 
         &--hit {
             color: green;
