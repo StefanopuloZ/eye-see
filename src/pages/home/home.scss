@@ -1,0 +1,54 @@
+.lt-home {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px 40px;
+    text-align: center;
+
+    &__title {
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px;
+    }
+
+    &__number {
+        font-size: 36px;
+        font-weight: bold;
+        display: flex;
+        height: 100px;
+        width: 100px;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__mid-wrapper {
+        display: flex;
+        justify-content: center;
+        margin: auto;
+
+        &-right {
+            margin-left: auto;
+            min-width: 100px;
+        }
+
+        &-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 2;
+            padding-left: 100px;
+
+            & button {
+                width: 100px;
+                padding: 5px 10px;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+
+            & input {
+                width: 100px;
+                padding: 5px 10px;
+                text-align: center;
+            }
+        }
+    }
+}
