@@ -1,54 +1,70 @@
+@import '../../styles/config.scss';
+
 .lt-home {
-    width: 100%;
-    min-height: 100vh;
-    padding: 20px 40px;
+  width: 100%;
+  min-height: 100vh;
+  text-align: center;
+
+  &__container {
+    max-width: 800px;
+    padding: 0 6px;
+    margin: auto;
+  }
+
+  &__start-btn {
+    color: $purple;
+    width: 150px;
+    border: 1px solid $purple;
+    padding: 10px 15px;
+    background-color: #fff;
+    cursor: pointer;
     text-align: center;
+    margin-top: 20px;
+    font-size: 17px;
+    transition: all 0.2s ease;
 
-    &__title {
-        font-size: 18px;
-        font-weight: bold;
-        padding: 10px;
+    &:hover {
+      box-shadow: $box-shadow;
     }
+  }
 
-    &__number {
-        font-size: 36px;
-        font-weight: bold;
-        display: flex;
-        height: 100px;
-        width: 100px;
-        justify-content: center;
-        align-items: center;
+  &__title {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 10px;
+    text-shadow: 1px 1px 5px $purple;
+  }
+
+  &__number {
+    font-size: 50px;
+    font-weight: bold;
+    display: flex;
+    height: 100px;
+    width: 100px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__mid-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+
+    & input {
+      width: 200px;
+      padding: 10px 15px;
+      text-align: center;
+      text-transform: uppercase;
+      font-size: 22px;
+      font-weight: bold;
+
+      &::-webkit-input-placeholder {
+        font-size: 16px;
+        text-transform: initial;
+      }
     }
-
-    &__mid-wrapper {
-        display: flex;
-        justify-content: center;
-        margin: auto;
-
-        &-right {
-            margin-left: auto;
-            min-width: 100px;
-        }
-
-        &-left {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            flex: 2;
-            padding-left: 100px;
-
-            & button {
-                width: 100px;
-                padding: 5px 10px;
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            & input {
-                width: 100px;
-                padding: 5px 10px;
-                text-align: center;
-            }
-        }
-    }
+  }
 }

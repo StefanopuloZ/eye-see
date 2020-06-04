@@ -48,7 +48,6 @@ const Home = props => {
   }, [countNumber]);
 
   const handleRadioChange = e => {
-    console.log('asd');
     setDifficulty(e.currentTarget.value);
   };
 
@@ -119,27 +118,27 @@ const Home = props => {
 
   return (
     <div className="lt-home" tabIndex={0} onKeyPress={handleKeyPress}>
-      <h2 className="lt-home__title">Difficulty:</h2>
-      <RadioButtons
-        difficulty={difficulty}
-        onChange={handleRadioChange}
-        disabled={gameInProgress}
-      />
-      <div className="lt-home__mid-wrapper">
-        <div className="lt-home__mid-wrapper-left">
-          <div className="lt-home__number">
-            {randomNumber && randomNumber.number}
-          </div>
+      <div className="lt-home__container">
+        <h1 className="lt-home__title">ALPHABET REFLEX GAME</h1>
+        <RadioButtons
+          difficulty={difficulty}
+          onChange={handleRadioChange}
+          disabled={gameInProgress}
+        />
+        <div className="lt-home__score">
+          <Score mappedLetters={mappedLetters} />
+        </div>
+        <div className="lt-home__mid-wrapper">
           <button className="lt-home__start-btn" onClick={handleButtonClick}>
             {gameInProgress ? 'Stop' : 'Start Game'}
           </button>
-          <input readOnly value={pressedLetter} placeholder="Enter letter" />
+          <div className="lt-home__number">
+            {randomNumber && randomNumber.number}
+          </div>
+          <input readOnly value={pressedLetter} placeholder="Input letter" />
         </div>
-        <div className="lt-home__mid-wrapper-right">
-          <Score mappedLetters={mappedLetters} />
-        </div>
+        <LettersTable mappedLetters={mappedLetters} isGameInProgress={gameInProgress} />
       </div>
-      <LettersTable mappedLetters={mappedLetters} />
     </div>
   );
 };

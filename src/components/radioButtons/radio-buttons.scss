@@ -1,11 +1,11 @@
 .lt-radio-buttons {
   display: flex;
-  width: max-content;
+  justify-content: space-evenly;
   margin: auto;
   padding: 10px;
 
   & label {
     display: block;
-    width: 200px;
+    width: 120px;
   }
 }

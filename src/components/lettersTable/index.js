@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './letters-table.scss';
 
 const LettersTable = props => {
-  const { mappedLetters } = props;
+  const { mappedLetters, isGameInProgress } = props;
 
   const table = Object.keys(mappedLetters).map(key => {
     return (
@@ -19,7 +19,7 @@ const LettersTable = props => {
   });
 
   return (
-    <div className="lt-letters">
+    <div className={`lt-letters ${isGameInProgress && 'lt-letters--active'}`}>
       {table}
     </div>
   );
@@ -27,8 +27,11 @@ const LettersTable = props => {
 
 LettersTable.propTypes = {
   mappedLetters: PropTypes.object.isRequired,
+  isGameInProgress: PropTypes.bool
 };
 
-LettersTable.defaultProps = {};
+LettersTable.defaultProps = {
+  isGameInProgress: false,
+};
 
 export default LettersTable;
