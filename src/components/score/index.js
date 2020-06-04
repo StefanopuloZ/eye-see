@@ -20,10 +20,11 @@ const Score = props => {
   });
 
   return (
-    <div className="lt-score-wrapper">
-      <div>Hit: {hit}</div>
-      <div>Miss: {miss}</div>
-      <div>Left: {left}</div>
+    <div className="lt-score">
+      <h2>Score:</h2>
+      <div className="lt-score__hit">Hit: {hit}</div>
+      <div className="lt-score__miss">Miss: {miss}</div>
+      <div className="lt-score__left">Left: {left}</div>
     </div>
   );
 };

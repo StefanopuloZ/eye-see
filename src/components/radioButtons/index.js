@@ -6,7 +6,7 @@ const RadioButtons = props => {
   const { onChange, difficulty, disabled } = props;
 
   return (
-    <form className="lt-radio-buttons-wrapper">
+    <form className="lt-radio-buttons">
       <div>
         <label>
           <input

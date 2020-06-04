@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import './style.scss';
+import './home.scss';
 import {
   makeLettersMap,
   makeNumbersArray,
@@ -56,7 +56,7 @@ const Home = props => {
     clearTimeout(timer.current);
     setNumbersArray(makeNumbersArray());
     setCountNumber(0);
-  }
+  };
 
   const handleKeyPress = e => {
     if (!gameInProgress) {
@@ -117,14 +117,27 @@ const Home = props => {
   };
 
   return (
-    <div className="test" tabIndex={0} onKeyPress={handleKeyPress}>
-      <RadioButtons difficulty={difficulty} onChange={handleRadioChange} disabled={gameInProgress} />
-      <h1>number: {randomNumber && randomNumber.number}</h1>
-      <button onClick={handleButtonClick}>
-        {gameInProgress ? 'Stop' : 'Start'}
-      </button>
-      <input readOnly value={pressedLetter} />
-      <Score mappedLetters={mappedLetters} />
+    <div className="lt-home" tabIndex={0} onKeyPress={handleKeyPress}>
+      <h2 className="lt-home__title">Difficulty:</h2>
+      <RadioButtons
+        difficulty={difficulty}
+        onChange={handleRadioChange}
+        disabled={gameInProgress}
+      />
+      <div className="lt-home__mid-wrapper">
+        <div className="lt-home__mid-wrapper-left">
+          <div className="lt-home__number">
+            {randomNumber && randomNumber.number}
+          </div>
+          <button className="lt-home__start-btn" onClick={handleButtonClick}>
+            {gameInProgress ? 'Stop' : 'Start'}
+          </button>
+          <input readOnly value={pressedLetter} placeholder="Enter letter" />
+        </div>
+        <div className="lt-home__mid-wrapper-right">
+          <Score mappedLetters={mappedLetters} />
+        </div>
+      </div>
       <LettersTable mappedLetters={mappedLetters} />
     </div>
   );

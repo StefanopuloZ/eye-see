@@ -8,7 +8,7 @@ const LettersTable = props => {
   const table = Object.keys(mappedLetters).map(key => {
     return (
       <div
-        className={`lt-letters-wrapper__letter lt-letters-wrapper__letter--${mappedLetters[key].status}`}
+        className={`lt-letters__letter lt-letters__letter--${mappedLetters[key].status}`}
         key={key}
       >
         <span>
@@ -19,7 +19,7 @@ const LettersTable = props => {
   });
 
   return (
-    <div className="lt-letters-wrapper">
+    <div className="lt-letters">
       {table}
     </div>
   );

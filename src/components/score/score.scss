@@ -1,5 +1,27 @@
-.lt-score-wrapper {
-    width: 50%;
-    border: 1px solid pink;
+.lt-score {
+    text-align: left;
+    max-width: 100px;
     margin-left: auto;
+
+    h2 {
+        font-size: 18px;
+        font-weight: bold;
+        padding-bottom: 5px;
+    }
+
+    div {
+        padding: 2px 0;
+    }
+
+    &__hit {
+        color: green;
+    }
+
+    &__miss {
+        color: red;
+    }
+
+    &__left {
+        color: purple;
+    }
 }
