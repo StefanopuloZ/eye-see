@@ -48,6 +48,7 @@ const Home = props => {
   }, [countNumber]);
 
   const handleRadioChange = e => {
+    console.log('asd');
     setDifficulty(e.currentTarget.value);
   };
 
