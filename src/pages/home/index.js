@@ -130,7 +130,7 @@ const Home = props => {
             {randomNumber && randomNumber.number}
           </div>
           <button className="lt-home__start-btn" onClick={handleButtonClick}>
-            {gameInProgress ? 'Stop' : 'Start'}
+            {gameInProgress ? 'Stop' : 'Start Game'}
           </button>
           <input readOnly value={pressedLetter} placeholder="Enter letter" />
         </div>
